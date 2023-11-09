@@ -14,6 +14,8 @@ $ npm i libsql-stateless
 # or
 $ bun add libsql-stateless
 ```
+⚠️ **WARNING: The Docs are out of date. Give me a few days.**
+
 
 ## The Result Type
 Every function in this library returns a `Result<T, R>` type.
