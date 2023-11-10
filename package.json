@@ -54,7 +54,8 @@
     "postbuild": "cp package-cjs.json ./lib-cjs/package.json",
     "typecheck": "tsc --noEmit",
     "test": "bun run _tests/test2.ts",
-    "clean": "npm run prebuild"
+    "clean": "npm run prebuild",
+    "publish": "npm publish && npm run clean"
   },
   "type": "module",
   "types": "lib-esm/main.d.ts",

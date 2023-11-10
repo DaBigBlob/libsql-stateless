@@ -16,7 +16,7 @@ export type PipelineResOk = {
     base_url: string | null,
     results: Array<StreamResOk|StreamResErr>
 }
-export type PipelineResErr = {
+export type PipelineResErr = string|{
     error: string
 }
 
