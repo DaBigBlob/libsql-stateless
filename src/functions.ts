@@ -25,9 +25,8 @@ async function hranaFetch(s: {
 /**
  * @async
  * @description Executes exactly one (1) SQL statements.
- * @param {libsqlConfig} conf libsql's config for DB connection
- * @param {libsqlSQLStatement} stmt libsql's raw API sql statement
- * @returns {Promise<libsqlResult<libsqlStatementResOkData, libsqlStreamResErrData|libsqlPipelineResErr>>}
+ * @param {libsqlConfig} conf libsql's config for DB connection {@link libsqlConfig}
+ * @param {libsqlSQLStatement} stmt libsql's raw API sql statement {@link libsqlSQLStatement}
  */
 export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement): Promise<libsqlResult<libsqlStatementResOkData, libsqlStreamResErrData|libsqlPipelineResErr>> {
     const res = await hranaFetch({conf, req_json: {
@@ -57,9 +56,8 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
 /**
  * @async
  * @description Executes many SQL statements. Can be used to perform implicit transactions.
- * @param {libsqlConfig} conf libsql's config for DB connection
- * @param {libsqlArray<BatchReqSteps>} batch_steps libsql's raw API sql batch steps
- * @returns {Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlStreamResErrData|libsqlPipelineResErr>>}
+ * @param {libsqlConfig} conf libsql's config for DB connection {@link libsqlConfig}
+ * @param {Array<BatchReqSteps>} batch_steps array of libsql's raw API sql batch steps {@link BatchReqSteps}
  */
 export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlBatchReqStep>): Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlStreamResErrData|libsqlPipelineResErr>> {
     const res = await hranaFetch({conf, req_json: {
@@ -89,8 +87,7 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
 /**
  * @async
  * @description Check if the server supports this library
- * @param {Config} conf libsql's config for DB connection
- * @returns {Promise<Result<null, null>>}
+ * @param {Config} conf libsql's config for DB connection {@link libsqlConfig}
  */
 export async function libsqlServerCompatCheck(conf: libsqlConfig): Promise<libsqlResult<null, null>> {
     if ((await fetch(
