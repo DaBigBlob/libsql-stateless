@@ -1,8 +1,8 @@
 //### Resul type
-export type Result<T, E> = { isOk: true, val: T}|{ isOk: false, err: E}
+export type libsqlResult<T, E> = { isOk: true, val: T}|{ isOk: false, err: E};
 
 //### Config Type
-export type Config = {
+export type libsqlConfig = {
     db_url: string,
     authToken?: string
 }
@@ -10,84 +10,84 @@ export type Config = {
 //### Hrana Types
 //url: https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#hrana-over-http
 //## Pipeline Intractions ======================================================
-export type PipelineReq = {
+export type libsqlPipelineReq = {
     baton: string | null,
-    requests: Array<CloseStreamReq|ExecuteStreamReq|BatchStreamReq>
+    requests: Array<libsqlCloseStreamReq|libsqlExecuteStreamReq|libsqlBatchStreamReq>
 }
-export type PipelineResOk = {
+export type libsqlPipelineResOk = {
     baton: string | null,
     base_url: string | null,
-    results: Array<StreamResOk|StreamResErr>
+    results: Array<libsqlStreamResOk|libsqlStreamResErr>
 }
-export type PipelineResErr = string|{
+export type libsqlPipelineResErr = string|{
     error: string
 }
 
 //## StreamReqKind =============================================================
-export type CloseStreamReq = {
+export type libsqlCloseStreamReq = {
     type: "close",
 }
-export type ExecuteStreamReq = {
+export type libsqlExecuteStreamReq = {
     type: "execute",
-    stmt: SQLStatement
+    stmt: libsqlSQLStatement
 }
-export type BatchStreamReq = {
+export type libsqlBatchStreamReq = {
     type: "batch",
     batch: {
-        steps: Array<BatchReqStep>,
+        steps: Array<libsqlBatchReqStep>,
     }
 }
 //other types are not dealt with in this lib
 
 //## StreamResKind =============================================================
-export type StreamResOk = {
+export type libsqlStreamResOk = {
     type: "ok",
-    response:  CloseStreamResOk|ExecuteStreamResOk|BatchStreamResOk
+    response:  libsqlCloseStreamResOk|libsqlExecuteStreamResOk|libsqlBatchStreamResOk
 }
-export type StreamResErr = {
+export type libsqlStreamResErr = {
     type: "error",
-    error: StreamResErrData
+    error: libsqlStreamResErrData
 }
 
 //## SQLStatement ==============================================================
-export type SQLStatement = {
+export type libsqlSQLStatement = {
     sql: string,
-    args?: Array<SQLValue>,
+    args?: Array<libsqlSQLValue>,
     named_args?: Array<{
         name: string,
-        value: SQLValue,
+        value: libsqlSQLValue,
     }>,
     want_rows?: boolean,
 }
 
 //## BatchReqSteps =============================================================
-export type BatchReqStep = {
-    condition?: BatchReqStepExecCond | null,
-    stmt: SQLStatement,
+export type libsqlBatchReqStep = {
+    condition?: libsqlBatchReqStepExecCond | null,
+    stmt: libsqlSQLStatement,
 }
 
 //## Stream Res Ok Kinds =======================================================
-export type CloseStreamResOk = {
+export type libsqlCloseStreamResOk = {
     type: "close",
 }
-export type ExecuteStreamResOk = {
+export type libsqlExecuteStreamResOk = {
     type: "execute",
-    result: StatementResOkData
+    result: libsqlStatementResOkData
 }
-export type BatchStreamResOk = {
+export type libsqlBatchStreamResOk = {
     type: "batch",
-    result: BatchStreamResOkData,
+    result: libsqlBatchStreamResOkData,
 }
 //other types are not dealt with in this lib
 
 //## StreamResErrData ==========================================================
-export type StreamResErrData = {
+export type libsqlStreamResErrData = {
     message: string,
     code?: string | null
 }
 
 //## SQLValues =================================================================
-export type SQLValue = 
+export type libsqlSQLValue = 
     { type: "null" } |
     { type: "integer", value: string } |
     { type: "float", value: number } |
@@ -95,30 +95,30 @@ export type SQLValue =
     { type: "blob", base64: string };
 
 //## BatchReqStepExecCond ======================================================
-export type BatchReqStepExecCond = 
+export type libsqlBatchReqStepExecCond = 
     { type: "ok", step: number } | //uint32: 0-based index in the steps array
     { type: "error", step: number } | //uint32: 0-based index in the steps array
-    { type: "not", cond: BatchReqStepExecCond } |
-    { type: "and", conds: Array<BatchReqStepExecCond> } |
-    { type: "or", conds: Array<BatchReqStepExecCond> } |
+    { type: "not", cond: libsqlBatchReqStepExecCond } |
+    { type: "and", conds: Array<libsqlBatchReqStepExecCond> } |
+    { type: "or", conds: Array<libsqlBatchReqStepExecCond> } |
     { type: "is_autocommit" };
 
 //## StatementResOkData ========================================================
-export type StatementResOkData = {
-    cols: Array<SQLColumn>,
-    rows: Array<Array<SQLValue>>,
+export type libsqlStatementResOkData = {
+    cols: Array<libsqlSQLColumn>,
+    rows: Array<Array<libsqlSQLValue>>,
     affected_row_count: number, //uint32
     last_insert_rowid: string | null
 }
 
 //## BatchStreamResOkData ======================================================
-export type BatchStreamResOkData = {
-    step_results: Array<StatementResOkData | null>,
-    step_errors: Array<StreamResErrData | null>
+export type libsqlBatchStreamResOkData = {
+    step_results: Array<libsqlStatementResOkData | null>,
+    step_errors: Array<libsqlStreamResErrData | null>
 }
 
 //## SQLColumn =================================================================
-export type SQLColumn = {
+export type libsqlSQLColumn = {
     name: string | null,
     decltype: string | null
 }
