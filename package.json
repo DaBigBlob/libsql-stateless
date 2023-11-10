@@ -58,5 +58,12 @@
     "prod": "npm publish && npm run clean"
   },
   "type": "module",
-  "types": "lib-esm/main.d.ts"
+  "types": "lib-esm/main.d.ts",
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./lib-esm/main.d.ts"
+      ]
+    }
+  }
 }
