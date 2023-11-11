@@ -20,7 +20,7 @@
 
 # Installation
 ```sh
-$ npm i libsql-stateless
+$ npm i libsql-stateless #pnpm, yarn, etc.
 # or
 $ bun add libsql-stateless
 ```
