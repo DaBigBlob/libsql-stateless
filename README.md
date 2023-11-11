@@ -6,11 +6,11 @@
 - ✅ **Does no extra computation.**
 - ✅ **Has no premature optimizations.**
 - ✅ **Is built for:** Quick stateless query execution. (Mainly for serverless and edge functions.)
-- ⚠️ **Supports everything in @libsql/client** except (explicit) `transactions`.
+- ⚠️ **Supports everything in `@libsql/client`** except (explicit) `transactions`.
 - ⚠️ **The API provided by `libsql-stateless` is raw and explicit** for reducing (computational and memory) overheads.
 - ✅ **For easier DX, consider using [`libsql-stateless-easy`](https://github.com/DaBigBlob/libsql-stateless-easy)** however this comes at the cost of non-zero-dependency and (computational and memory) overheads potentially unneeded by you.
 
-
+# Why not just use `@libsql/client`?
 
 # Installation
 ```sh
