@@ -105,7 +105,7 @@ export type libsqlBatchReqStepExecCond =
 
 //## StatementResOkData ========================================================
 export type libsqlStatementResOkData = {
-    cols: Array<libsqlSQLColumn>,
+    cols: Array<libsqlSQLColumnElm>,
     rows: Array<Array<libsqlSQLValue>>,
     affected_row_count: number, //uint32
     last_insert_rowid: string | null
@@ -118,7 +118,7 @@ export type libsqlBatchStreamResOkData = {
 }
 
 //## SQLColumn =================================================================
-export type libsqlSQLColumn = {
+export type libsqlSQLColumnElm = {
     name: string | null,
     decltype: string | null
 }
