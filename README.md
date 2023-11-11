@@ -25,7 +25,7 @@ $ bun add libsql-stateless
 # Goto [`WIKI`](https://github.com/DaBigBlob/libsql-stateless/wiki) for  Specifications and Examples
 
 # TODO
-- Switch to protobuf from json? (not really needed if not reading thousands or rows/s)
+- Switch to protobuf from json? (not really needed if not reading thousands of rows/s)
 - Finding the purpose of my existence.
 
 # Special Thanks
