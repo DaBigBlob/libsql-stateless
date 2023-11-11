@@ -9,7 +9,9 @@
 - ⚠️ Supports everything in `@libsql/client` **except (explicit) `transactions` and local or in-memory DBs.**
 - ⚠️ **The API provided by `libsql-stateless` is raw and explicit** for reducing (computational and memory) overheads.
 
-**For easier DX, consider using [`libsql-stateless-easy`](https://github.com/DaBigBlob/libsql-stateless-easy) instead**: this, however, comes at the cost of non-zero-dependency and (computational and memory) overheads potentially unneeded by you. But is still very very very slim compared to `@libsql/client`.
+<br>
+
+**For easier DX, consider using [`libsql-stateless-easy`](https://github.com/DaBigBlob/libsql-stateless-easy) instead**: it, however, comes with the cost of non-zero-dependency and (computational and memory) overheads potentially unneeded by you. But is still very very very slim compared to `@libsql/client`.
 
 # Why not just use `@libsql/client`?
 1. Not everyone needs stateful DB connection or the overheads that come with it.
