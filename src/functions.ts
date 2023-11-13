@@ -1,9 +1,9 @@
-import { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlPipelineReq, libsqlPipelineResErr, libsqlPipelineResOk, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr, libsqlStreamResErrData } from "./types";
+import { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlErrorRes, libsqlPipelineReq, libsqlPipelineResErr, libsqlPipelineResOk, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types";
 
 async function hranaFetch(s: {
     conf: libsqlConfig,
     req_json: libsqlPipelineReq
-}): Promise<libsqlResult<libsqlPipelineResOk, libsqlPipelineResErr>> {
+}): Promise<libsqlResult<libsqlPipelineResOk, libsqlErrorRes>> {
     const res = await fetch(
         `${s.conf.db_url}/v3/pipeline`, //https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#execute-a-pipeline-of-requests-json
         {
@@ -13,13 +13,20 @@ async function hranaFetch(s: {
         }
     );
     if (res.ok) return {isOk: true, val: (await res.json() as libsqlPipelineResOk)};
-    else return {isOk: false, err: (await (async () => {
-        try {
-            return await res.clone().json()
-        } catch {
-            return await res.text();
+    else return {isOk: false, err: {
+        kind: "libsqlPipelineResErr",
+        error_data: {
+            server_message: (await (async () => {
+                try {
+                    return await res.clone().json()
+                } catch {
+                    return await res.text();
+                }
+            })() as libsqlPipelineResErr),
+            http_status_code: res.status,
+            http_status_text: res.statusText
         }
-    })() as libsqlPipelineResErr)};
+    }};
 }
 
 /**
@@ -28,7 +35,7 @@ async function hranaFetch(s: {
  * @param {libsqlConfig} conf libsql's config for DB connection: {@link libsqlConfig}
  * @param {libsqlSQLStatement} stmt libsql's raw API sql statement: {@link libsqlSQLStatement}
  */
-export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement): Promise<libsqlResult<libsqlStatementResOkData, libsqlStreamResErrData|libsqlPipelineResErr>> {
+export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement): Promise<libsqlResult<libsqlStatementResOkData, libsqlErrorRes>> {
     const res = await hranaFetch({conf, req_json: {
         baton: null,
         requests: [
@@ -48,9 +55,12 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
             resu.type=="ok" &&
             resu.response.type=="execute"
         ) return {isOk: true, val: resu.response.result};
-        else return {isOk: false, err: (resu as libsqlStreamResErr).error}; //has to be StreamResErr
+        else return {isOk: false, err: {
+            kind: "libsqlStreamResErrData",
+            error_data: (resu as libsqlStreamResErr).error
+        }}; //has to be StreamResErr
     }
-    else return {isOk: false, err: res.err};  //PipelineResErr or StreamResErrData
+    else return res;  //PipelineResErr or StreamResErrData
 }
 
 /**
@@ -59,7 +69,7 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
  * @param {libsqlConfig} conf libsql's config for DB connection: {@link libsqlConfig}
  * @param {Array<BatchReqSteps>} batch_steps array of libsql's raw API sql batch steps: {@link BatchReqSteps}
  */
-export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlBatchReqStep>): Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlStreamResErrData|libsqlPipelineResErr>> {
+export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlBatchReqStep>): Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlErrorRes>> {
     const res = await hranaFetch({conf, req_json: {
         baton: null,
         requests: [
@@ -79,9 +89,12 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
             resu.type=="ok" &&
             resu.response.type=="batch"
         ) return {isOk: true, val: (resu.response.result)};
-        else return {isOk: false, err: (resu as libsqlStreamResErr).error}; //has to be StreamResErr
+        else return {isOk: false, err: {
+            kind: "libsqlStreamResErrData",
+            error_data: (resu as libsqlStreamResErr).error
+        }}; //has to be StreamResErr
     }
-    else return {isOk: false, err: res.err}; //PipelineResErr or StreamResErrData
+    else return res; //PipelineResErr or StreamResErrData
 }
 
 /**

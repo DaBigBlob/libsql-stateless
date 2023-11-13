@@ -7,6 +7,17 @@ export type libsqlConfig = {
     authToken?: string
 }
 
+//### Error Type
+//the final wrapper for error in this library for what is returned by hrana server
+export type libsqlErrorRes = {
+    kind: "libsqlPipelineResErr"|"libsqlStreamResErrData",
+    error_data: libsqlStreamResErrData|{
+        server_message: libsqlPipelineResErr
+        http_status_code: number,
+        http_status_text: string
+    }
+}
+
 //### Hrana Types
 //url: https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#hrana-over-http
 //## Pipeline Intractions ======================================================
@@ -83,7 +94,7 @@ export type libsqlBatchStreamResOk = {
 //## StreamResErrData ==========================================================
 export type libsqlStreamResErrData = {
     message: string,
-    code?: string | null
+    code?: string
 }
 
 //## SQLValues =================================================================
