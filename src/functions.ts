@@ -1,9 +1,9 @@
-import { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlErrorRes, libsqlPipelineReq, libsqlPipelineResErr, libsqlPipelineResOk, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types";
+import { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlPipelineReq, libsqlPipelineResErr, libsqlPipelineResOk, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types";
 
 async function hranaFetch(s: {
     conf: libsqlConfig,
     req_json: libsqlPipelineReq
-}): Promise<libsqlResult<libsqlPipelineResOk, libsqlErrorRes>> {
+}): Promise<libsqlResult<libsqlPipelineResOk, libsqlError>> {
     const res = await fetch(
         `${s.conf.db_url}/v3/pipeline`, //https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#execute-a-pipeline-of-requests-json
         {
@@ -35,7 +35,7 @@ async function hranaFetch(s: {
  * @param {libsqlConfig} conf libsql's config for DB connection: {@link libsqlConfig}
  * @param {libsqlSQLStatement} stmt libsql's raw API sql statement: {@link libsqlSQLStatement}
  */
-export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement): Promise<libsqlResult<libsqlStatementResOkData, libsqlErrorRes>> {
+export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement): Promise<libsqlResult<libsqlStatementResOkData, libsqlError>> {
     const res = await hranaFetch({conf, req_json: {
         baton: null,
         requests: [
@@ -69,7 +69,7 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
  * @param {libsqlConfig} conf libsql's config for DB connection: {@link libsqlConfig}
  * @param {Array<BatchReqSteps>} batch_steps array of libsql's raw API sql batch steps: {@link BatchReqSteps}
  */
-export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlBatchReqStep>): Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlErrorRes>> {
+export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlBatchReqStep>): Promise<libsqlResult<libsqlBatchStreamResOkData, libsqlError>> {
     const res = await hranaFetch({conf, req_json: {
         baton: null,
         requests: [

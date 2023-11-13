@@ -9,7 +9,7 @@ export type libsqlConfig = {
 
 //### Error Type
 //the final wrapper for error in this library for what is returned by hrana server
-export type libsqlErrorRes = {
+export type libsqlError = {
     kind: "libsqlPipelineResErr"|"libsqlStreamResErrData",
     error_data: libsqlStreamResErrData|{
         server_message: libsqlPipelineResErr
