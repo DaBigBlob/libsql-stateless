@@ -10,12 +10,15 @@ export type libsqlConfig = {
 //### Error Type
 //the final wrapper for error in this library for what is returned by hrana server
 export type libsqlError = {
-    kind: "libsqlPipelineResErr"|"libsqlStreamResErrData",
-    error_data: libsqlStreamResErrData|{
-        server_message: libsqlPipelineResErr
+    kind: "LIBSQL_SERVER_ERROR",
+    error_data: {
+        server_message: string
         http_status_code: number,
         http_status_text: string
     }
+}|{
+    kind: "LIBSQL_RESPONSE_ERROR",
+    error_data: libsqlStreamResErrData
 }
 
 //### Hrana Types
@@ -25,13 +28,10 @@ export type libsqlPipelineReq = {
     baton: string | null,
     requests: Array<libsqlCloseStreamReq|libsqlExecuteStreamReq|libsqlBatchStreamReq>
 }
-export type libsqlPipelineResOk = {
+export type libsqlPipelineRes = {
     baton: string | null,
     base_url: string | null,
     results: Array<libsqlStreamResOk|libsqlStreamResErr>
-}
-export type libsqlPipelineResErr = string|{
-    error: string
 }
 
 //## StreamReqKind =============================================================
