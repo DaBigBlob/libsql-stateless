@@ -11,14 +11,11 @@ export type libsqlConfig = {
 //the final wrapper for error in this library for what is returned by hrana server
 export type libsqlError = {
     kind: "LIBSQL_SERVER_ERROR",
-    error_data: {
-        server_message: string
-        http_status_code: number,
-        http_status_text: string
-    }
+    server_message: string|null,
+    http_status_code: number
 }|{
     kind: "LIBSQL_RESPONSE_ERROR",
-    error_data: libsqlStreamResErrData
+    data: libsqlStreamResErrData
 }
 
 //### Hrana Types

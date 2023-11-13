@@ -12,14 +12,20 @@ async function hranaFetch(s: {
             body: JSON.stringify(s.req_json)
         }
     );
-    if (res.ok) return {isOk: true, val: (await res.json() as libsqlPipelineRes)};
+    if (
+        res.ok &&
+        res.headers.get("content-type")==="application/json"
+    ) return {isOk: true, val: (await res.json() as libsqlPipelineRes)};
     else return {isOk: false, err: {
         kind: "LIBSQL_SERVER_ERROR",
-        error_data: {
-            server_message: await res.text(),
-            http_status_code: res.status,
-            http_status_text: res.statusText
-        }
+        server_message: await (async () => {
+            try {
+                return await res.text()
+            } catch {
+                return null;
+            }
+        })(),
+        http_status_code: res.status
     }};
 }
 
@@ -51,7 +57,7 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
         ) return {isOk: true, val: resu.response.result};
         else return {isOk: false, err: {
             kind: "LIBSQL_RESPONSE_ERROR",
-            error_data: (resu as libsqlStreamResErr).error //has to be StreamResErr
+            data: (resu as libsqlStreamResErr).error //has to be StreamResErr
         }};
     }
     else return res;  //whatever server error returned
@@ -85,7 +91,7 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
         ) return {isOk: true, val: (resu.response.result)};
         else return {isOk: false, err: {
             kind: "LIBSQL_RESPONSE_ERROR",
-            error_data: (resu as libsqlStreamResErr).error //has to be StreamResErr
+            data: (resu as libsqlStreamResErr).error //has to be StreamResErr
         }};
     }
     else return res; //whatever server error returned
