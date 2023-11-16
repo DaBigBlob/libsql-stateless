@@ -6,7 +6,7 @@
 - ✅ **Does no extra computation.**
 - ✅ **Has no premature optimizations.**
 - ✅ **Is built for:** Quick stateless query execution. (Mainly for serverless and edge functions.)
-- ⚠️ Supports everything in `@libsql/client` **except (explicit) `transactions` and local or in-memory DBs.**
+- ⚠️ Supports everything in `@libsql/client` **except local and in-memory DBs.**
 - ⚠️ **The API provided by `libsql-stateless` is raw and explicit** for reducing (computational and memory) overheads.
 
 <br>
