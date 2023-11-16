@@ -177,5 +177,5 @@ dist
 # Project specific
 lib-cjs/
 lib-esm/
-_tests/
+_conf.ts
 wiki/
