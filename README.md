@@ -8,6 +8,7 @@
 - ✅ Unlike `@libsql/client/web`, **every function performs complete execution in exactly 1 roundtrip.**
 - ✅ **Is built for:** Quick stateless query execution. (Mainly for serverless and edge functions.)
 - ✅ **Supports everything in** `@libsql/client/web`
+- ⚠️ **Interactive transactions are not supported** because this lib is stateless but [`transactions`](https://github.com/DaBigBlob/libsql-stateless/wiki/transactions) are supported.
 - ⚠️ **The API provided by `libsql-stateless` is raw and explicit** for reducing (computational and memory) overheads.
 
 <br>
