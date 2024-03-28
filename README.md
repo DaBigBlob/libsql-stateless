@@ -31,7 +31,3 @@ $ bun add libsql-stateless
 
 # TODO
 - Switch to protobuf from json? (not really needed if not reading thousands of rows/s)
-- Finding the purpose of my existence.
-
-# Special Thanks
-- The Voices in my Head
