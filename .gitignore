@@ -179,3 +179,4 @@ lib-cjs/
 lib-esm/
 _conf.ts
 wiki/
+*.lockb
