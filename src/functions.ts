@@ -9,8 +9,7 @@ async function hranaFetch(s: {
         {
             method: 'POST',
             headers: (s.conf.authToken) ? {'Authorization': 'Bearer '+s.conf.authToken} : undefined,
-            body: JSON.stringify(s.req_json),
-            cache: 'no-store'
+            body: JSON.stringify(s.req_json)
         }
     );
     if (
