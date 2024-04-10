@@ -66,6 +66,11 @@ import { skjdgfksg } from "./_conf";
     }
     else console.error(res2.err);
 
+    const res4 = await libsqlExecute(conf, {sql: "select first_name, last_name, email from contacts where contact_id = 1;"});
+    if (res4.isOk) {
+    }
+    else console.error(res4.err);
+
 
 
     const res3 = await libsqlServerCompatCheck(conf);
