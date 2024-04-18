@@ -30,5 +30,6 @@ $ bun add libsql-stateless
 
 # Goto [`WIKI`](https://github.com/DaBigBlob/libsql-stateless/wiki) for  Specifications and Examples
 
-> NOTE: <unix_epoch_miliseconds>-HRANA_3_SPEC.md is the current API level  
-downloaded from: https://github.com/tursodatabase/libsql/blob/main/docs/HRANA_3_SPEC.md at <unix_epoch_miliseconds>
+> NOTE: <unix_epoch_miliseconds>-HRANA_3_SPEC.md is the current API level.  
+Downloaded from: https://github.com/tursodatabase/libsql/blob/main/docs/HRANA_3_SPEC.md at <unix_epoch_miliseconds>.  
+Servers using older API levels may not be compatible. In that case downgrade to an earlier of this package.
