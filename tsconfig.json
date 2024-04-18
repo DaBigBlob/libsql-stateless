@@ -13,11 +13,13 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
 
     "lib": ["Es2022", "WebWorker"],
     "module": "Node16",
-    "target": "ES5",
+    "target": "ES2019",
     "declaration": true,
     "outDir": "./dist"
-  }
+  },
+  "include": ["./src/*"]
 }
