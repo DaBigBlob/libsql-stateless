@@ -1,0 +1,5 @@
+#!/bin/sh
+
+curl -s "https://raw.githubusercontent.com/tursodatabase/libsql/main/docs/HRANA_3_SPEC.md" > HRANA_3_SPEC-transient.md
+diff HRANA_3_SPEC-transient.md ./*-HRANA_3_SPEC.md
+rm HRANA_3_SPEC-transient.md
