@@ -30,5 +30,4 @@ $ bun add libsql-stateless
 
 # Goto [`WIKI`](https://github.com/DaBigBlob/libsql-stateless/wiki) for  Specifications and Examples
 
-# TODO
-- Switch to protobuf from json? (not really needed if not reading thousands of rows/s)
+> NOTE: <unix_epoch_miliseconds>-HRANA_3_SPEC.md is the current API level

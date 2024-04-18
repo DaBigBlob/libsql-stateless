@@ -118,9 +118,9 @@ export type libsqlStatementResOkData = {
     rows: Array<Array<libsqlSQLValue>>,
     affected_row_count: number, //uint32
     last_insert_rowid: string | null,
-    rows_read?: number, // ? because unstable
-    rows_written?: number, // ? because unstable
-    query_duration_ms?: number // ? because unstable
+    rows_read: number,
+    rows_written: number,
+    query_duration_ms: number
 }
 
 //## BatchStreamResOkData ======================================================
