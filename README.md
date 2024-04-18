@@ -5,7 +5,7 @@
 - ✅ **Extremely thin:** Has no dependency, only has a few functions that implement the [`Hrana v3 HTTP`](https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md) protocol from scratch, and has no classes (tend to duplicate memory and/or perform long memory traversals).
 - ✅ **Does no extra computation.**
 - ✅ **Has no premature optimizations.**
-- ✅ **Is extremely light:** 2KB (minified)/ 899B (minified+gzipped)
+- ✅ **Is extremely light:** 1.4kB (minified)/ 658B (minified+gzipped)
 - ✅ Unlike `@libsql/client/web`, **every function performs complete execution in exactly 1 roundtrip.**
 - ✅ **Is built for:** Quick stateless query execution. (Mainly for serverless and edge functions.)
 - ✅ **Supports everything in** `@libsql/client/web`
