@@ -45,7 +45,7 @@ export type libsqlBatchStreamReq = {
         steps: Array<libsqlBatchReqStep>,
     }
 }
-//other types are not dealt with in this libb
+//other types are not dealt with in this lib
 
 //## StreamResKind =============================================================
 export type libsqlStreamResOk = {

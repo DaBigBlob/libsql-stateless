@@ -1,5 +1,5 @@
-import { libsqlExecute, libsqlSQLValue } from "../src/main";
-import { skjdgfksg } from "./_conf";
+import { libsqlExecute, type libsqlSQLValue } from "../src/main.js";
+import { skjdgfksg } from "./_conf.js";
 
 (async () => {
     console.log("##libsqlExecute##")
