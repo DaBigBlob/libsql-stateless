@@ -4,6 +4,7 @@ import { skjdgfksg } from "./_conf";
 (async () => {
     const conf = skjdgfksg;
 
+    console.log("##libsqlBatch##")
     const res = await libsqlBatch(conf, [
         //{stmt: {sql: "BEGIN DEFERRED"}},
         {stmt: {sql: "select * from contacts where contact_id = ?;", args: [{type: "integer", value: "3"}]}},
@@ -18,6 +19,7 @@ import { skjdgfksg } from "./_conf";
     }), null, 4));
     else console.error(res.err);
 
+    console.log("##libsqlBatch##")
     const resb = await libsqlBatch(conf, [
         {stmt: {sql: "BEGIN DEFERRED"}},
         {stmt: {sql: "select * from contacts where contact_id = ?;", args: [{type: "integer", value: "3"}]},
@@ -55,6 +57,7 @@ import { skjdgfksg } from "./_conf";
     else console.error(resb.err);
 
 
+    console.log("##libsqlExecute##")
     const res2 = await libsqlExecute(conf, {sql: "select first_name, last_name, email from contacts where contact_id = 1;"});
     if (res2.isOk) {
         console.log(JSON.stringify(res2.val, null, 4));
@@ -66,13 +69,7 @@ import { skjdgfksg } from "./_conf";
     }
     else console.error(res2.err);
 
-    const res4 = await libsqlExecute(conf, {sql: "select first_name, last_name, email from contacts where contact_id = 1;"});
-    if (res4.isOk) {
-    }
-    else console.error(res4.err);
-
-
-
+    console.log("##libsqlServerCompatCheck##")
     const res3 = await libsqlServerCompatCheck(conf);
     if (res3.isOk) console.log("Server Compat Check OK");
     else console.error("Server Compat Check NOT OK");

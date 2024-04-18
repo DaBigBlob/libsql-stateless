@@ -60,6 +60,7 @@ export type libsqlStreamResErr = {
 //## SQLStatement ==============================================================
 export type libsqlSQLStatement = {
     sql: string,
+    // sql_id: number | null, // not useful in stateless
     args?: Array<libsqlSQLValue>,
     named_args?: Array<{
         name: string,
@@ -91,7 +92,7 @@ export type libsqlBatchStreamResOk = {
 //## StreamResErrData ==========================================================
 export type libsqlStreamResErrData = {
     message: string,
-    code?: string
+    code?: string | null
 }
 
 //## SQLValues =================================================================
