@@ -19,12 +19,14 @@ export type libsqlError = {
 }
 
 //### Hrana Types
-//url: https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#hrana-over-http
+// "//line:" from 1713449025236-HRANA_3_SPEC.md
 //## Pipeline Intractions ======================================================
+//line: 652
 export type libsqlPipelineReq = {
     baton: string | null,
     requests: Array<libsqlCloseStreamReq|libsqlExecuteStreamReq|libsqlBatchStreamReq>
 }
+//line: 657
 export type libsqlPipelineRes = {
     baton: string | null,
     base_url: string | null,
@@ -32,15 +34,19 @@ export type libsqlPipelineRes = {
 }
 
 //## StreamReqKind =============================================================
+//line: 792
 export type libsqlCloseStreamReq = {
     type: "close",
 }
+//line: 809
 export type libsqlExecuteStreamReq = {
     type: "execute",
     stmt: libsqlSQLStatement
 }
+//line: 828
 export type libsqlBatchStreamReq = {
     type: "batch",
+    // line: 1059
     batch: {
         steps: Array<libsqlBatchReqStep>,
     }
@@ -48,16 +54,19 @@ export type libsqlBatchStreamReq = {
 //other types are not dealt with in this lib
 
 //## StreamResKind =============================================================
+//line: 667
 export type libsqlStreamResOk = {
     type: "ok",
     response:  libsqlCloseStreamResOk|libsqlExecuteStreamResOk|libsqlBatchStreamResOk
 }
+//line: 672
 export type libsqlStreamResErr = {
     type: "error",
     error: libsqlStreamResErrData
 }
 
 //## SQLStatement ==============================================================
+//line: 978
 export type libsqlSQLStatement = {
     sql: string,
     // sql_id: number | null, // not useful in stateless
@@ -70,19 +79,23 @@ export type libsqlSQLStatement = {
 }
 
 //## BatchReqSteps =============================================================
+// line: 1063
 export type libsqlBatchReqStep = {
     condition?: libsqlBatchReqStepExecCond | null,
     stmt: libsqlSQLStatement,
 }
 
 //## Stream Res Ok Kinds =======================================================
+//line: 796
 export type libsqlCloseStreamResOk = {
     type: "close",
 }
+//line: 814
 export type libsqlExecuteStreamResOk = {
     type: "execute",
     result: libsqlStatementResOkData
 }
+//line: 833
 export type libsqlBatchStreamResOk = {
     type: "batch",
     result: libsqlBatchStreamResOkData,
@@ -90,12 +103,14 @@ export type libsqlBatchStreamResOk = {
 //other types are not dealt with in this lib
 
 //## StreamResErrData ==========================================================
+// line: 959
 export type libsqlStreamResErrData = {
     message: string,
     code?: string | null
 }
 
 //## SQLValues =================================================================
+// line: 1266
 export type libsqlSQLValue = 
     { type: "null" } |
     { type: "integer", value: string } |
@@ -104,6 +119,7 @@ export type libsqlSQLValue =
     { type: "blob", base64: string };
 
 //## BatchReqStepExecCond ======================================================
+// line: 1078
 export type libsqlBatchReqStepExecCond = 
     { type: "ok", step: number } | //uint32: 0-based index in the steps array
     { type: "error", step: number } | //uint32: 0-based index in the steps array
@@ -113,6 +129,7 @@ export type libsqlBatchReqStepExecCond =
     { type: "is_autocommit" };
 
 //## StatementResOkData ========================================================
+//line: 1024
 export type libsqlStatementResOkData = {
     cols: Array<libsqlSQLColumnElm>,
     rows: Array<Array<libsqlSQLValue>>,
@@ -124,12 +141,14 @@ export type libsqlStatementResOkData = {
 }
 
 //## BatchStreamResOkData ======================================================
+//line: 1106
 export type libsqlBatchStreamResOkData = {
     step_results: Array<libsqlStatementResOkData | null>,
     step_errors: Array<libsqlStreamResErrData | null>
 }
 
 //## SQLColumn =================================================================
+// line: 1034
 export type libsqlSQLColumnElm = {
     name: string | null,
     decltype: string | null
