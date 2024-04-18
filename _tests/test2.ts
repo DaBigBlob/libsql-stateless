@@ -1,5 +1,5 @@
-import { libsqlExecute, libsqlBatch, libsqlServerCompatCheck, libsqlSQLValue} from "../src/main";
-import { skjdgfksg } from "./_conf";
+import { libsqlExecute, libsqlBatch, libsqlServerCompatCheck, type libsqlSQLValue} from "../src/main.js";
+import { skjdgfksg } from "./_conf.js";
 
 (async () => {
     const conf = skjdgfksg;

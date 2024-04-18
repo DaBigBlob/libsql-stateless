@@ -1,4 +1,4 @@
-import { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types.js";
+import type { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types.js";
 
 async function hranaFetch(s: {
     conf: libsqlConfig,
