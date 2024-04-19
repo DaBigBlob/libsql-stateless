@@ -9,11 +9,11 @@
   },
   "bugs": {
     "url": "https://github.com/DaBigBlob/libsql-stateless/issues",
-    "email": "localboxcrox@gmail.com"
+    "email": "libsqlstateless@hman.io"
   },
   "author": {
     "name": "LocalBox Crox",
-    "email": "localboxcrox@gmail.com"
+    "email": "libsqlstateless@hman.io"
   },
   "license": "MIT",
   "type": "module",
@@ -50,7 +50,7 @@
     "dts": true,
     "shims": true,
     "format": ["cjs", "esm"],
-    "target": ["deno1", "node18", "chrome120", "edge120", "firefox120", "safari16"]
+    "target": ["deno1", "node18", "chrome120", "edge120", "firefox120", "safari16", "ES2020"]
   },
   "scripts": {
     "prepublishOnly": "npm run build",
