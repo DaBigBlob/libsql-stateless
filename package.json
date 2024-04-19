@@ -29,7 +29,7 @@
     ".": {
       "types": "./dist/main.d.ts",
       "import": "./dist/main.js",
-      "require": "./dist/main.js"
+      "require": "./dist/main.cjs"
     }
   },
   "devDependencies": {
