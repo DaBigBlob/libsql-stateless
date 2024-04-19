@@ -17,7 +17,6 @@
 
     "lib": ["ES2023", "WebWorker"],
     "module": "Node16",
-    "target": "ES2019",
     "declaration": true,
     "outDir": "./dist"
   },
