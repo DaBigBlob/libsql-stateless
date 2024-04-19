@@ -32,9 +32,7 @@
   "devDependencies": {
     "semantic-release": "^23.0.8",
     "tsup": "^8.0.2",
-    "typescript": "^5.0.0",
-    "vite": "^5.2.9",
-    "vitest": "^1.5.0"
+    "typescript": "^5.0.0"
   },
   "scripts": {
     "prepublishOnly:old": "npm run build",
@@ -47,8 +45,6 @@
     "prod:old": "npm publish && npm run clean",
     "build": "tsup",
     "dev": "tsup --watch --clean=false",
-    "test": "vitest",
-    "test:watch": "vitest watch",
     "semantic-release": "semantic-release"
   },
   "keywords": [
