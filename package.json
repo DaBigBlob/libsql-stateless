@@ -20,7 +20,9 @@
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "files": [
-    "./dist/**"
+    "./dist/*",
+    "./LICENSE",
+    "./package.json"
   ],
   "exports": {
     ".": {
