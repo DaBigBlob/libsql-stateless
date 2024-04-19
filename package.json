@@ -22,7 +22,8 @@
   "files": [
     "./dist/*",
     "./LICENSE",
-    "./package.json"
+    "./package.json",
+    "./README.md"
   ],
   "exports": {
     ".": {
