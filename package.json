@@ -36,6 +36,22 @@
     "tsup": "^8.0.2",
     "typescript": "^5.0.0"
   },
+  "tsup": {
+    "entry": ["./src/main.ts"],
+    "splitting": false,
+    "sourcemap": false,
+    "clean": true,
+    "minify": true,
+    "minifyWhitespace": true,
+    "outDir": "./dist",
+    "platform": "neutral",
+    "treeshake": "safest",
+    "cjsInterop": true,
+    "dts": true,
+    "shims": true,
+    "format": ["cjs", "esm"],
+    "target": ["deno1", "node18", "chrome120", "edge120", "firefox120", "safari16"]
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "prebuild": "rm -rf ./dist",
