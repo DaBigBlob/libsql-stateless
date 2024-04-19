@@ -6,6 +6,7 @@ export default defineConfig({
   sourcemap: false,
   clean: true,
   minify: true,
+  minifyWhitespace: true,
   outDir: './dist',
   platform: 'neutral',
   treeshake: 'safest',
