@@ -1,4 +1,4 @@
-import type { libsqlBatchReqStep, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types.js";
+import type { libsqlBatchReqStep, libsqlBatchStreamResOk, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlExecuteStreamResOk, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData, libsqlStreamResErr } from "./types.js";
 
 async function hranaFetch(s: {
     conf: libsqlConfig,
@@ -48,13 +48,13 @@ export async function libsqlExecute(conf: libsqlConfig, stmt: libsqlSQLStatement
 
     if (res.isOk) {
         const resu = res.val.results[0]; //this because [0] is where we executed the statement
-        if (
-            resu.type=="ok" &&
-            resu.response.type=="execute"
-        ) return {isOk: true, val: resu.response.result};
+        if (resu.type=="ok") return {
+            isOk: true,
+            val: (resu.response as libsqlExecuteStreamResOk).result // cast because is guaranteed to be execute by line: 699
+        };
         else return {isOk: false, err: {
             kind: "LIBSQL_RESPONSE_ERROR",
-            data: (resu as libsqlStreamResErr).error //has to be StreamResErr
+            data: resu.error //has to be StreamResErr
         }};
     }
     else return res;  //whatever server error returned
@@ -82,10 +82,10 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
 
     if (res.isOk) {
         const resu = res.val.results[0]; //this because [0] is where we executed the statement
-        if (
-            resu.type=="ok" &&
-            resu.response.type=="batch"
-        ) return {isOk: true, val: (resu.response.result)};
+        if (resu.type=="ok") return {
+            isOk: true,
+            val: (resu.response as libsqlBatchStreamResOk).result // cast because is guaranteed to be execute by line: 1070
+        };
         else return {isOk: false, err: {
             kind: "LIBSQL_RESPONSE_ERROR",
             data: (resu as libsqlStreamResErr).error //has to be StreamResErr
