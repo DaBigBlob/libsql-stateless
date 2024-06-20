@@ -4,8 +4,8 @@ async function hranaFetch(s: {
     conf: libsqlConfig,
     req_json: libsqlPipelineReq
 }): Promise<libsqlResult<libsqlPipelineRes, libsqlError>> {
-    const res = await fetch(
-        `${s.conf.db_url}/v3/pipeline`, //https://github.com/tursodatabase/libsql/blob/main/libsql-server/docs/HRANA_3_SPEC.md#execute-a-pipeline-of-requests-json
+    const res = await (s.conf.fetch || globalThis.fetch)(
+        `${s.conf.db_url}/v3/pipeline`, //line 646 from 1713449025236-HRANA_3_SPEC.md
         {
             method: 'POST',
             headers: (s.conf.authToken) ? {'Authorization': 'Bearer '+s.conf.authToken} : undefined,

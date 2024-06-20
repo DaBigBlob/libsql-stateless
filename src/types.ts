@@ -4,7 +4,8 @@ export type libsqlResult<T, E> = { isOk: true, val: T}|{ isOk: false, err: E};
 //### Config Type
 export type libsqlConfig = {
     db_url: string,
-    authToken?: string
+    authToken?: string,
+    fetch?: typeof fetch
 }
 
 //### Error Type
