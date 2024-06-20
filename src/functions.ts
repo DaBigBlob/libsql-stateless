@@ -12,10 +12,7 @@ async function hranaFetch(s: {
             body: JSON.stringify(s.req_json)
         }
     );
-    if (
-        res.ok &&
-        res.headers.get("content-type")==="application/json"
-    ) return {isOk: true, val: (await res.json() as libsqlPipelineRes)};
+    if (res.ok) return {isOk: true, val: (await res.json() as libsqlPipelineRes)};
     else return {isOk: false, err: {
         kind: "LIBSQL_SERVER_ERROR",
         server_message: await (async () => {
