@@ -88,7 +88,7 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
         };
         else return {isOk: false, err: {
             kind: "LIBSQL_RESPONSE_ERROR",
-            data: (resu as libsqlStreamResErr).error //has to be StreamResErr
+            data: resu.error //has to be StreamResErr
         }};
     }
     else return res; //whatever server error returned
