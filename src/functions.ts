@@ -4,7 +4,7 @@ async function hranaFetch(s: {
     conf: libsqlConfig,
     req_json: libsqlPipelineReq
 }): Promise<libsqlResult<libsqlPipelineRes, libsqlError>> {
-    const res = await (s.conf.fetch || globalThis.fetch)(
+    const res = await (s.conf.fetch ?? globalThis.fetch)(
         `${s.conf.db_url}/v3/pipeline`, //line 646 from 1713449025236-HRANA_3_SPEC.md
         {
             method: 'POST',
