@@ -1,10 +1,10 @@
-import type { libsqlBatchReqStep, libsqlBatchStreamResOk, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlExecuteStreamResOk, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData } from "./types.js";
+import type { libsqlBatchReqStep, libsqlBatchStreamResOk, libsqlBatchStreamResOkData, libsqlConfig, libsqlError, libsqlExecuteStreamResOk, libsqlFetchLike, libsqlPipelineReq, libsqlPipelineRes, libsqlResult, libsqlSQLStatement, libsqlStatementResOkData } from "./types.js";
 
 async function hranaFetch(s: {
     conf: libsqlConfig,
     req_json: libsqlPipelineReq
 }): Promise<libsqlResult<libsqlPipelineRes, libsqlError>> {
-    const res = await (s.conf.fetch ?? globalThis.fetch)(
+    const res = await (s.conf.fetch ?? (globalThis as unknown as {fetch: libsqlFetchLike}).fetch)(
         `${s.conf.db_url}/v3/pipeline`, //line 646 from 1713449025236-HRANA_3_SPEC.md
         {
             method: 'POST',
@@ -100,7 +100,7 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
  * @param {Config} conf libsql's config for DB connection: {@link libsqlConfig}
  */
 export async function libsqlServerCompatCheck(conf: libsqlConfig): Promise<libsqlResult<null, null>> {
-    if ((await fetch(
+    if ((await (conf.fetch ?? (globalThis as unknown as {fetch: libsqlFetchLike}).fetch)(
         `${conf.db_url}/v3`,
         {
             method: 'GET'

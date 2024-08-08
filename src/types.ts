@@ -5,7 +5,7 @@ export type libsqlResult<T, E> = { isOk: true, val: T}|{ isOk: false, err: E};
 export type libsqlConfig = {
     db_url: string,
     authToken?: string,
-    fetch?: typeof fetch
+    fetch?: libsqlFetchLike
 }
 
 //### Error Type
@@ -18,6 +18,22 @@ export type libsqlError = {
     kind: "LIBSQL_RESPONSE_ERROR",
     data: libsqlStreamResErrData
 }
+
+//### Fetch Def
+//the only features of WHATHG fetch required in this library
+export type libsqlFetchLike = (
+    input: string,
+    init?: {
+        body?: string,
+        headers?: Record<string, string>,
+        method?: 'POST'|'GET'
+    }
+) => Promise<{
+    readonly ok: boolean,
+    readonly status: number,
+    json(): Promise<any>,
+    text(): Promise<string>
+}>;
 
 //### Hrana Types
 // "//line:" from 1713449025236-HRANA_3_SPEC.md
