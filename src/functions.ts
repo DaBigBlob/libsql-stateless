@@ -5,7 +5,7 @@ async function hranaFetch(s: {
     req_json: libsqlPipelineReq
 }): Promise<libsqlResult<libsqlPipelineRes, libsqlError>> {
     const res = await (s.conf.fetch ?? (globalThis as unknown as {fetch: libsqlFetchLike}).fetch)(
-        `${s.conf.db_url}/v3/pipeline`, //line 646 from 1713449025236-HRANA_3_SPEC.md
+        `${s.conf.url}/v3/pipeline`, //line 646 from 1713449025236-HRANA_3_SPEC.md
         {
             method: 'POST',
             headers: (s.conf.authToken) ? {'Authorization': 'Bearer '+s.conf.authToken} : undefined,
@@ -101,7 +101,7 @@ export async function libsqlBatch(conf: libsqlConfig, batch_steps: Array<libsqlB
  */
 export async function libsqlServerCompatCheck(conf: libsqlConfig): Promise<libsqlResult<null, null>> {
     if ((await (conf.fetch ?? (globalThis as unknown as {fetch: libsqlFetchLike}).fetch)(
-        `${conf.db_url}/v3`,
+        `${conf.url}/v3`,
         {
             method: 'GET'
         }

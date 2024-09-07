@@ -1,9 +1,9 @@
 import { libsqlExecute, type libsqlSQLValue } from "../src/main.js";
-import { skjdgfksg } from "./_conf.js";
+import { conf } from "./_conf.js";
 
 (async () => {
     console.log("##libsqlExecute##")
-    const res2 = await libsqlExecute(skjdgfksg, {sql: "select first_name, last_name, email from contacts where contact_id = 1;"});
+    const res2 = await libsqlExecute(conf, {sql: "select first_name, last_name, email from contacts where contact_id = 1;"});
     if (res2.isOk) {
         console.log(JSON.stringify(res2.val, null, 4));
 

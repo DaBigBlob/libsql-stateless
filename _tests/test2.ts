@@ -1,9 +1,7 @@
 import { libsqlExecute, libsqlBatch, libsqlServerCompatCheck, type libsqlSQLValue} from "../src/main.js";
-import { skjdgfksg } from "./_conf.js";
+import { conf } from "./_conf.js";
 
 (async () => {
-    const conf = skjdgfksg;
-
     console.log("##libsqlBatch##")
     const res = await libsqlBatch(conf, [
         //{stmt: {sql: "BEGIN DEFERRED"}},
